@@ -1,0 +1,247 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BTC/USD 06:59 KST candle report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "market",
+    "interval_seconds",
+    "as_of_date_kst",
+    "started_at_utc",
+    "previous",
+    "current"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "market": {
+      "const": "BTC/USD"
+    },
+    "interval_seconds": {
+      "const": 60
+    },
+    "as_of_date_kst": {
+      "type": "string",
+      "format": "date"
+    },
+    "started_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "previous": {
+      "$ref": "#/$defs/day"
+    },
+    "current": {
+      "$ref": "#/$defs/day"
+    }
+  },
+  "$defs": {
+    "day": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "date_kst",
+        "candle_open_kst",
+        "candle_closed_kst",
+        "expected_timestamp_unix",
+        "bitstamp",
+        "backfilled",
+        "kraken_comparison"
+      ],
+      "properties": {
+        "date_kst": {
+          "type": "string",
+          "format": "date"
+        },
+        "candle_open_kst": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "candle_closed_kst": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expected_timestamp_unix": {
+          "type": "integer",
+          "minimum": 0,
+          "multipleOf": 60
+        },
+        "bitstamp": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/lookup"
+            },
+            {
+              "properties": {
+                "source_url": {
+                  "pattern": "^https://www\\.bitstamp\\.net/api/v2/ohlc/btcusd/\\?"
+                }
+              }
+            }
+          ]
+        },
+        "backfilled": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "kraken_comparison": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/kraken"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "if": {
+        "properties": {
+          "bitstamp": {
+            "properties": {
+              "status": {
+                "const": "verified"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "backfilled": {
+            "type": "boolean"
+          },
+          "kraken_comparison": {
+            "type": "null"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "backfilled": {
+            "type": "null"
+          },
+          "kraken_comparison": {
+            "$ref": "#/$defs/kraken"
+          }
+        }
+      }
+    },
+    "lookup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "source_url",
+        "requested_at_utc",
+        "timestamp_unix",
+        "close_usd",
+        "error"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "verified",
+            "unavailable"
+          ]
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "requested_at_utc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "timestamp_unix": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "multipleOf": 60
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "close_usd": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(?=[0-9.]*[1-9])[0-9]+(?:\\.[0-9]+)?$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "error": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "if": {
+        "properties": {
+          "status": {
+            "const": "verified"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "timestamp_unix": {
+            "type": "integer",
+            "minimum": 0,
+            "multipleOf": 60
+          },
+          "close_usd": {
+            "type": "string",
+            "pattern": "^(?=[0-9.]*[1-9])[0-9]+(?:\\.[0-9]+)?$"
+          },
+          "error": {
+            "type": "null"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "timestamp_unix": {
+            "type": "null"
+          },
+          "close_usd": {
+            "type": "null"
+          },
+          "error": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "kraken": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/lookup"
+        },
+        {
+          "properties": {
+            "source_url": {
+              "pattern": "^https://api\\.kraken\\.com/0/public/OHLC\\?"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
