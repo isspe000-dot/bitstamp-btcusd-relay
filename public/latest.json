@@ -2,25 +2,9 @@
   "schema_version": 1,
   "market": "BTC/USD",
   "interval_seconds": 60,
-  "as_of_date_kst": "2026-11-18",
-  "started_at_utc": "2026-11-17T22:59:28.972184+00:00",
+  "as_of_date_kst": "2026-11-19",
+  "started_at_utc": "2026-11-18T22:58:11.637691+00:00",
   "previous": {
-    "date_kst": "2026-11-17",
-    "candle_open_kst": "2026-11-17T06:59:00+09:00",
-    "candle_closed_kst": "2026-11-17T07:00:00+09:00",
-    "expected_timestamp_unix": 1794866340,
-    "bitstamp": {
-      "status": "verified",
-      "source_url": "https://www.bitstamp.net/api/v2/ohlc/btcusd/?step=60&limit=4&end=1794866400&exclude_current_candle=true",
-      "requested_at_utc": "2026-11-17T22:59:28.972246+00:00",
-      "timestamp_unix": 1794866340,
-      "close_usd": "65242.54",
-      "error": null
-    },
-    "backfilled": true,
-    "kraken_comparison": null
-  },
-  "current": {
     "date_kst": "2026-11-18",
     "candle_open_kst": "2026-11-18T06:59:00+09:00",
     "candle_closed_kst": "2026-11-18T07:00:00+09:00",
@@ -28,9 +12,25 @@
     "bitstamp": {
       "status": "verified",
       "source_url": "https://www.bitstamp.net/api/v2/ohlc/btcusd/?step=60&limit=4&end=1794952800&exclude_current_candle=true",
-      "requested_at_utc": "2026-11-17T22:59:29.352771+00:00",
+      "requested_at_utc": "2026-11-18T22:58:11.637736+00:00",
       "timestamp_unix": 1794952740,
       "close_usd": "64292.66",
+      "error": null
+    },
+    "backfilled": true,
+    "kraken_comparison": null
+  },
+  "current": {
+    "date_kst": "2026-11-19",
+    "candle_open_kst": "2026-11-19T06:59:00+09:00",
+    "candle_closed_kst": "2026-11-19T07:00:00+09:00",
+    "expected_timestamp_unix": 1795039140,
+    "bitstamp": {
+      "status": "verified",
+      "source_url": "https://www.bitstamp.net/api/v2/ohlc/btcusd/?step=60&limit=4&end=1795039200&exclude_current_candle=true",
+      "requested_at_utc": "2026-11-18T22:58:12.240088+00:00",
+      "timestamp_unix": 1795039140,
+      "close_usd": "62258.83",
       "error": null
     },
     "backfilled": true,
