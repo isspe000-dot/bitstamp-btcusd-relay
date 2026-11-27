@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "market": "BTC/USD",
+  "interval_seconds": 60,
+  "as_of_date_kst": "2026-11-28",
+  "started_at_utc": "2026-11-27T23:03:52.516869+00:00",
+  "previous": {
+    "date_kst": "2026-11-27",
+    "candle_open_kst": "2026-11-27T06:59:00+09:00",
+    "candle_closed_kst": "2026-11-27T07:00:00+09:00",
+    "expected_timestamp_unix": 1795730340,
+    "bitstamp": {
+      "status": "verified",
+      "source_url": "https://www.bitstamp.net/api/v2/ohlc/btcusd/?step=60&limit=4&end=1795730400&exclude_current_candle=true",
+      "requested_at_utc": "2026-11-27T23:03:52.516913+00:00",
+      "timestamp_unix": 1795730340,
+      "close_usd": "60738.49",
+      "error": null
+    },
+    "backfilled": true,
+    "kraken_comparison": null
+  },
+  "current": {
+    "date_kst": "2026-11-28",
+    "candle_open_kst": "2026-11-28T06:59:00+09:00",
+    "candle_closed_kst": "2026-11-28T07:00:00+09:00",
+    "expected_timestamp_unix": 1795816740,
+    "bitstamp": {
+      "status": "verified",
+      "source_url": "https://www.bitstamp.net/api/v2/ohlc/btcusd/?step=60&limit=4&end=1795816800&exclude_current_candle=true",
+      "requested_at_utc": "2026-11-27T23:03:53.091399+00:00",
+      "timestamp_unix": 1795816740,
+      "close_usd": "59742.37",
+      "error": null
+    },
+    "backfilled": true,
+    "kraken_comparison": null
+  }
+}
